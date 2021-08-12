@@ -1,4 +1,4 @@
-import scribe from "./scribe";
+import scribe from "./scribe.vue";
 
 scribe.install = Vue => Vue.component(scribe.name,scribe)
 

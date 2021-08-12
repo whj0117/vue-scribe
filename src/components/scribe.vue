@@ -309,6 +309,10 @@ export default {
   display: inline;
 }
 
+.article {
+  margin: 100px;
+}
+
 .tips {
   position: fixed;
   padding: 10px 20px;

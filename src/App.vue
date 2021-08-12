@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <div class="scribe-wrap">
-      <scribe :options="options"></scribe>
-    </div>
+    <scribe :options="options"></scribe>
   </div>
 </template>
 
@@ -26,9 +24,5 @@ export default {
   }
 }
 </script>
-<style scoped>
-.scribe-wrap{
-  width: 500px;
-  margin: 100px auto;
-}
+<style>
 </style>
