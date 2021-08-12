@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'scribe',
+  name: 'vue-scribe',
   props: {
     options: {
       type: Object,

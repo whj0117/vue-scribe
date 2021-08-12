@@ -1,9 +1,11 @@
 import scribe from "./scribe.vue";
+import _Vue from 'vue'
 
-scribe.install = Vue => Vue.component(scribe.name,scribe)
-
-if(typeof window !== 'undefined' && window.Vue){
-    install(window.Vue)
+scribe.install = Vue => {
+    if (!Vue) {
+        window.Vue = Vue = _Vue
+    }
+    Vue.component(scribe.name,scribe)
 }
 
 export default scribe
