@@ -89,10 +89,7 @@ module.exports = merge({}, {
                     options: {
                         presets: ["es2015"]
                     },
-                    include: [
-                        path.resolve(__dirname, "src"),
-                    ]
-                    // exclude: /node_modules/
+                    exclude:[/node_modules/]
                 },
                 {
                     test: /\.svg$/,

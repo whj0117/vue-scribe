@@ -1,7 +1,7 @@
 <template>
   <div class="scribe">
-    <div class="article" ref="article" @click.stop="showCancelTip" @mouseup.stop="onMouseup">{{ options.text }}</div>
-    <div @click="mark" v-show="showTip" class="tips" :style="{left:tipLeft+'px',top:tipTop + 'px','--backgroundColor':options.btnBgColor,color:options.btnColor,fontSize:options.btnSize+'px'}">{{ tipText }}</div>
+    <div class="article" ref="article" @click.stop="showCancelTip" @mouseup.stop="onMouseup">{{ text }}</div>
+    <div @click="mark" v-show="showTip" class="tips" :style="{left:tipLeft+'px',top:tipTop + 'px','--backgroundColor':btnBgColor,color:btnColor,fontSize:btnSize+'px'}">{{ tipText }}</div>
   </div>
 </template>
 
@@ -9,19 +9,30 @@
 export default {
   name: 'vue-scribe',
   props: {
-    options: {
-      type: Object,
-      default: () => {
-        return {
-          text: '我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本',
-          lineColor:'#000',
-          lineWidth:1,
-          btnBgColor:'rgba(0,0,0,.6)',
-          btnColor:'#fff',
-          btnSize:16
-        }
-      }
-    }
+    text:{
+      type:String,
+      default:'我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本'
+    },
+    lineColor:{
+      type:String,
+      default:'#000'
+    },
+    lineWidth:{
+      type:Number/String,
+      default:1
+    },
+    btnBgColor:{
+      type:String,
+      default:'rgba(0,0,0,.6)'
+    },
+    btnColor:{
+      type:String,
+      default:'#fff'
+    },
+    btnSize:{
+      type:Number/String,
+      default:16
+    },
   },
   data() {
     return {
@@ -140,8 +151,7 @@ export default {
       // 改成直接包裹整块文本
       let textNode = document.createElement('span')
       textNode.className = 'markLine mark_id_' + id
-      let options = this.options
-      textNode.style.cssText = `border-bottom:${options.lineWidth}px solid ${options.lineColor}`
+      textNode.style.cssText = `border-bottom:${this.lineWidth}px solid ${this.lineColor}`
       textNode.setAttribute('data-id', id)
       textNode.textContent = node.nodeValue.slice(startOffset, endOffset)
       fragment.appendChild(textNode)
@@ -300,17 +310,13 @@ export default {
   },
   beforeDestroy() {
     document.addEventListener('mouseup', this.closeTip)
-  }
+  },
 }
 </script>
 
 <style scoped>
 /deep/ .markLine {
   display: inline;
-}
-
-.article {
-  margin: 100px;
 }
 
 .tips {
