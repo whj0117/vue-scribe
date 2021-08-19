@@ -17,8 +17,8 @@ export default {
         lineColor:'#000',
         lineWidth:1,
         btnBgColor:'rgba(0,0,0,.6)',
-        btnColor:'#fff',
-        btnSize:16
+        btnTextColor:'#fff',
+        btnTextSize:16
       }
     }
   }

@@ -1,17 +1,8 @@
-// import Vue from 'vue'
-// import App from './App.vue'
-import scribe from './components/scribe'
+import Vue from 'vue'
+import App from './App.vue'
 
-// Vue.config.productionTip = false
+Vue.config.productionTip = false
 
-scribe.install = Vue => Vue.component(scribe.name,scribe)
-
-if(typeof window !== 'undefined' && window.Vue){
-  install(window.Vue)
-}
-
-export default scribe
-//
-// new Vue({
-//   render: h => h(App),
-// }).$mount('#app')
+new Vue({
+  render: h => h(App),
+}).$mount('#app')

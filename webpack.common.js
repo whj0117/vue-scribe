@@ -11,14 +11,6 @@ module.exports = {
                 use: [{ loader: "style-loader" }, { loader: "css-loader" }]
             },
             {
-                test: /\.scss$/,
-                use: ["style-loader", "css-loader", "sass-loader"]
-            },
-            {
-                test: /\.sass$/,
-                use: ["style-loader", "css-loader", "sass-loader?indentedSyntax"]
-            },
-            {
                 test: /\.styl(us)?$/,
                 use: [
                     { loader: "style-loader" },
@@ -74,10 +66,7 @@ module.exports = {
                 options: {
                     presets: ["es2015"]
                 },
-                include: [
-                    path.resolve(__dirname, "src"),
-                ]
-                // exclude: /node_modules/
+                include: [path.resolve(__dirname, "src")]
             },
             {
                 test: /\.svg$/,
@@ -112,7 +101,6 @@ module.exports = {
         alias: {
             vue$: "vue/dist/vue.esm.js",
         },
-        extensions: ["*", ".js", ".vue", ".json",'.png','.jpg'],
-        // modules: [path.resolve(__dirname, "src"), "node_modules"]
+        extensions: ["*", ".js", ".vue", ".json",'.png','.jpg']
     }
 };

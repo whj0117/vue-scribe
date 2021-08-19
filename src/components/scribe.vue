@@ -1,7 +1,10 @@
 <template>
   <div class="scribe">
-    <div class="article" ref="article" @click.stop="showCancelTip" @mouseup.stop="onMouseup">{{ text }}</div>
-    <div @click="mark" v-show="showTip" class="tips" :style="{left:tipLeft+'px',top:tipTop + 'px','--backgroundColor':btnBgColor,color:btnColor,fontSize:btnSize+'px'}">{{ tipText }}</div>
+    <div class="article" ref="article" @click.stop="showCancelTip" @mouseup.stop="onMouseup">{{ config.text }}</div>
+    <div @click="mark" v-show="showTip" class="tips"
+         :style="{left:tipLeft+'px',top:tipTop + 'px','--backgroundColor':config.btnBgColor,color:config.btnTextColor,fontSize:config.btnTextSize+'px'}">
+      {{ tipText }}
+    </div>
   </div>
 </template>
 
@@ -9,30 +12,11 @@
 export default {
   name: 'vue-scribe',
   props: {
-    text:{
-      type:String,
-      default:'我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本'
-    },
-    lineColor:{
-      type:String,
-      default:'#000'
-    },
-    lineWidth:{
-      type:Number/String,
-      default:1
-    },
-    btnBgColor:{
-      type:String,
-      default:'rgba(0,0,0,.6)'
-    },
-    btnColor:{
-      type:String,
-      default:'#fff'
-    },
-    btnSize:{
-      type:Number/String,
-      default:16
-    },
+    options: {
+      type: Object,
+      default: () => {
+      }
+    }
   },
   data() {
     return {
@@ -43,12 +27,54 @@ export default {
       tipTextBool: true,
       serializeData: [],
       idx: 0,
+      config: {
+        /**
+         * @description text content
+         * @type {String}
+         * @default text = '我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本'
+         */
+        text: '我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本我是一段文本',
+        /**
+         * @description underline color
+         * @type {String}
+         * @default lineColor = '#000'
+         */
+        lineColor: '#000',
+        /**
+         * @description underline width
+         * @type {String|Number}
+         * @default lineWidth = 1
+         */
+        lineWidth: 1,
+        /**
+         * @description set underline button background color
+         * @type {String}
+         * @default btnBgColor = 'rgba(0,0,0,.6)'
+         */
+        btnBgColor: 'rgba(0,0,0,.6)',
+        /**
+         * @description set underline button font color
+         * @type {String}
+         * @default btnTextColor = '#fff'
+         */
+        btnTextColor: '#fff',
+        /**
+         * @description set underline button font size
+         * @type {String|Number}
+         * @default btnTextSize = 16
+         */
+        btnTextSize: 16,
+      }
     }
   },
   mounted() {
+    this.setConfig(this.options);
     document.addEventListener('mouseup', this.closeTip)
   },
   methods: {
+    setConfig(option){
+      if (option && Object.keys(option).length) this.config = Object.assign(this.config, option);
+    },
     closeTip() {
       if (!this.showTip) return;
       this.showTip = false;
@@ -151,7 +177,8 @@ export default {
       // 改成直接包裹整块文本
       let textNode = document.createElement('span')
       textNode.className = 'markLine mark_id_' + id
-      textNode.style.cssText = `border-bottom:${this.lineWidth}px solid ${this.lineColor}`
+      let config = this.config
+      textNode.style.cssText = `border-bottom:${config.lineWidth}px solid ${config.lineColor}`
       textNode.setAttribute('data-id', id)
       textNode.textContent = node.nodeValue.slice(startOffset, endOffset)
       fragment.appendChild(textNode)
@@ -311,6 +338,14 @@ export default {
   beforeDestroy() {
     document.addEventListener('mouseup', this.closeTip)
   },
+  watch:{
+    "options": {
+      handler(n, o) {
+        this.setConfig(n);
+      },
+      deep: true,
+    },
+  }
 }
 </script>
 
@@ -330,7 +365,7 @@ export default {
   cursor: pointer;
 }
 
-.tips::after{
+.tips::after {
   position: absolute;
   display: block;
   width: 0;
