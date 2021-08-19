@@ -1,64 +1,34 @@
-const path = require("path");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const path = require("path")
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
+const {VueLoaderPlugin} = require("vue-loader")
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     plugins: [
+        new CleanWebpackPlugin(),
         new VueLoaderPlugin(),
+        new HtmlWebpackPlugin({
+            title:'index',
+            template:'./index.html',
+            filename:'index.html'
+        })
     ],
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [{ loader: "style-loader" }, { loader: "css-loader" }]
+                use: [{loader: "style-loader"}, {loader: "css-loader"}]
             },
             {
                 test: /\.styl(us)?$/,
                 use: [
-                    { loader: "style-loader" },
-                    { loader: "css-loader" },
-                    { loader: "stylus-loader" }
+                    {loader: "style-loader"},
+                    {loader: "css-loader"},
+                    {loader: "stylus-loader"}
                 ]
             },
             {
                 test: /\.vue$/,
-                loader: "vue-loader",
-                options: {
-                    loaders: {
-                        stylus: [
-                            { loader: "style-loader" },
-                            {
-                                loader: "css-loader",
-                                options: {
-                                    esModule: false,
-                                    import: [
-                                        path.resolve(
-                                            __dirname,
-                                            "./src/weblive/src/assets/css/base.styl"
-                                        )
-                                    ]
-                                }
-                            },
-                            {
-                                loader: "stylus-loader",
-                                options: {
-                                    "resolve url": true,
-                                    esModule: false,
-                                    import: [
-                                        path.resolve(
-                                            __dirname,
-                                            "./src/weblive/src/assets/css/iconfont.css"
-                                        ),
-                                        path.resolve(
-                                            __dirname,
-                                            "./src/weblive/src/assets/css/tim.css"
-                                        )
-                                    ]
-                                }
-                            }
-                        ],
-                        scss: ["style-loader", "css-loader", "sass-loader"],
-                        sass: ["style-loader", "css-loader", "sass-loader?indentedSyntax"]
-                    }
-                }
+                loader: "vue-loader"
             },
             {
                 test: /\.js$/,
@@ -66,24 +36,17 @@ module.exports = {
                 options: {
                     presets: ["es2015"]
                 },
-                include: [path.resolve(__dirname, "src")]
+                include: path.resolve(__dirname, "node_modules")
             },
             {
                 test: /\.svg$/,
-                loader: "svg-sprite-loader",
-                options: {
-                    symbolId: "[name]"
-                }
+                loader: "svg-sprite-loader"
             },
             {
                 test: /\.(png|jpg|gif|svg)$/,
                 loader: "url-loader",
                 options: {
                     limit: 1024,
-                    esModule: false, // 这里设置为false
-                    // outputPath: "img",
-                    encoding: "base64",
-                    //publicPath: "./img", //   /public/image
                     name: "img/[name].[hash:8].[ext]"
                 }
             },
@@ -101,6 +64,6 @@ module.exports = {
         alias: {
             vue$: "vue/dist/vue.esm.js",
         },
-        extensions: ["*", ".js", ".vue", ".json",'.png','.jpg']
+        extensions: ["*", ".js", ".vue", ".json", '.png', '.jpg']
     }
 };
