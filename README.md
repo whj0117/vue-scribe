@@ -41,7 +41,7 @@ componetns:{vueScribe}
     lineColor: '#000',
     /**
      * @description underline width
-     * @type {String|Number}
+     * @type {String<Number>}
      * @default lineWidth = 1
      */
     lineWidth: 1,
@@ -59,7 +59,7 @@ componetns:{vueScribe}
     btnTextColor: '#fff',
     /**
      * @description set underline button font size
-     * @type {String|Number}
+     * @type {String<Number>}
      * @default btnTextSize = 16
      */
     btnTextSize: 16,

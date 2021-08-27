@@ -1,6 +1,6 @@
 {
   "name": "vue-scribe",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": "whj0117",
   "private": false,
   "main": "lib/js/scribe.js",
