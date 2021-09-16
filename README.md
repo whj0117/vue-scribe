@@ -66,9 +66,9 @@ componetns:{vueScribe}
   }
 ```
 
-## 参考地址[]
+## 参考地址
 ```
-[https://www.cnblogs.com/wanglinmantan/p/15106871.html]
+[https://www.cnblogs.com/wanglinmantan/p/15106871.html](https://www.cnblogs.com/wanglinmantan/p/15106871.html)
 ```
 
 
